@@ -1,10 +1,34 @@
-Skeme Core API
+#Skeme API Gateway
+This API is the gateway to the Skeme Planning Software
+
+Prerequisites
+-------------
+This API uses Symfony 5 with the following bundles:
+
+- api-platform/api-pack
+- doctrine/doctrine-migrations-bundle
+- gedmo/doctrine-extensions
+- lexik/jwt-authentication-bundle
+- symfony/framework-bundle
+- symfony/validator
 
 Installation
 ------------
 
 ```bash
 $ composer install
+```
+
+Database Setup
+--------------
+
+#### Add the current to you .env (.env.local) file 
+```bash
+DATABASE_URL=mysql://user:password@127.0.0.1:3306/skeme_api_%kernel.environment%
+
+$ bin/console doctrine:database:create (do:da:cr) # Database creation
+$ bin/console doctrine:migrations:migrate (do:mi:mi) # Migrations
+$ bin/console doctrine:fixtures:load (do:fi:lo) # Data fixtures
 ```
 
 Lexik JWT Bundle Setup
