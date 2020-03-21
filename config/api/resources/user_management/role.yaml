@@ -1,0 +1,35 @@
+App\Entity\User\Role:
+    attributes:
+        normalization_context:
+            groups: ['userManagement:role:read']
+        denormalization_context:
+            groups: ['userManagement:role:write']
+        route_prefix: user_management
+        validation_groups: ['role']
+
+    collectionOperations:
+        get:
+            method: 'GET'
+            groups: ['userManagement:role:read']
+            filters:
+                - 'app.user_management.role.search_filter'
+                - 'app.user_management.role.order_filter'
+
+        post:
+            method: 'POST'
+            groups: ['userManagement:role:write']
+            validation_groups: ['role']
+
+    itemOperations:
+        get:
+            method: 'GET'
+            groups: ['userManagement:role:read']
+        put:
+            method: 'PUT'
+            groups: ['userManagement:role:write']
+        patch:
+            method: 'PATCH'
+            groups: ['userManagement:role:write']
+        delete:
+            method: 'DELETE'
+            groups: ['userManagement:role:write']

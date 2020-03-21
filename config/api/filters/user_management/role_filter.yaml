@@ -1,0 +1,20 @@
+services:
+
+    app.user_management.role.or_search_filter:
+        autowire: false
+        autoconfigure: false
+        class: App\Filter\Search\OrSearchFilter
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments:
+            - { id: 'partial', role: 'partial' }
+        tags:
+            - { name: 'api_platform.filter', id: 'app.user_management.role.search_filter' }
+
+    app.user_management.role.order_filter:
+        autowire: false
+        autoconfigure: false
+        parent: 'api_platform.doctrine.orm.order_filter'
+        arguments:
+            - { id: 'asc', role: 'asc' }
+        tags:
+            - { name: 'api_platform.filter', id: 'app.user_management.role.order_filter' }

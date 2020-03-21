@@ -1,0 +1,45 @@
+App\Entity\User\User:
+    attributes:
+        id:
+            groups: ['userManagement:user:read']
+        firstName:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        lastName:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        username:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        plainPassword:
+            groups:
+                - 'userManagement:user:write'
+        email:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        lastLogin:
+            groups: ['userManagement:user:read']
+        enabled:
+            groups: ['userManagement:user:read']
+        groups:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        securityRoles:
+            groups:
+                - 'userManagement:user:read'
+                - 'userManagement:user:write'
+        createdAt:
+            groups: ['userManagement:user:read']
+        createdBy:
+            groups: ['userManagement:user:read']
+        updatedAt:
+            groups: ['userManagement:user:read']
+        updatedBy:
+            groups: ['userManagement:user:read']
+        deletedAt:
+            groups: ['userManagement:user:read']

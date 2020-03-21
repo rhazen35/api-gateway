@@ -1,0 +1,22 @@
+App\Entity\User\Role:
+    attributes:
+        id:
+            groups: ['userManagement:role:read']
+        role:
+            groups:
+                - 'userManagement:role:read'
+                - 'userManagement:role:write'
+                - 'userManagement:group:read'
+                - 'userManagement:user:read'
+        enabled:
+            groups: ['userManagement:role:read']
+        createdAt:
+            groups: ['userManagement:role:read']
+        createdBy:
+            groups: ['userManagement:role:read']
+        updatedAt:
+            groups: ['userManagement:role:read']
+        updatedBy:
+            groups: ['userManagement:role:read']
+        deletedAt:
+            groups: ['userManagement:role:read']

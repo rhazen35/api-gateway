@@ -1,0 +1,34 @@
+App\Entity\User\Group:
+    attributes:
+        id:
+            groups: ['userManagement:group:read']
+        role:
+            groups:
+                - 'userManagement:group:read'
+                - 'userManagement:group:write'
+                - 'userManagement:user:read'
+                - 'userManagement:group:write'
+        securityRoles:
+            groups:
+                - 'userManagement:group:read'
+                - 'userManagement:group:write'
+        childGroups:
+            groups:
+                - 'userManagement:group:read'
+                - 'userManagement:group:write'
+        users:
+            groups:
+                - 'userManagement:group:read'
+                - 'userManagement:group:write'
+        enabled:
+            groups: ['userManagement:group:read']
+        createdAt:
+            groups: ['userManagement:group:read']
+        createdBy:
+            groups: ['userManagement:group:read']
+        updatedAt:
+            groups: ['userManagement:group:read']
+        updatedBy:
+            groups: ['userManagement:group:read']
+        deletedAt:
+            groups: ['userManagement:group:read']

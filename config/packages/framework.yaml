@@ -14,3 +14,10 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    # API Platform serialization
+    serializer:
+        circular_reference_handler:
+            App\Utility\API\CircularReferenceHandlerUtility
+        mapping:
+            paths: ['%kernel.project_dir%/config/api/serialization']
