@@ -70,3 +70,19 @@ Make a GET request to 'api/login_check' with the following:
 After you get the JWT token you can make requests with the token:
 
 Authorization: Bearer {YOUR_TOKEN}
+
+The Role System Explained
+-------------------------
+
+- Each user has at least one Role or Group
+- A Group is a Role that can have many Roles
+- A Group can have many Groups
+
+This allows for the following Use Case:
+
+An Admin can create/read/update/delete Users.
+
+[ROLE_ADMIN] has [ROLE_USER_CREATE, ROLE_USER_READ, ROLE_USER_UPDATE, ROLE_USER_DELETE]
+
+You only have to give a user the role ROLE_ADMIN in order to CRUD Users.
+Or give him/her only a specific role, like ROLE_USER_READ, to only allow for reading users.
