@@ -54,3 +54,18 @@ lexik_jwt_authentication:
     pass_phrase:      'your_secret_passphrase' # required for token creation, usage of an environment variable is recommended
     token_ttl:        3600
 ```
+
+Making a Request
+----------------
+
+In order to make a request you will have to get a JWT Token.
+
+Make a GET request to 'api/login_check' with the following:
+
+- Authorization : None
+- Content-Type: 'application/json'
+- The email and password (from the UserFixture)
+
+After you get the JWT token you can make requests with the token:
+
+Authorization: Bearer {YOUR_TOKEN}
