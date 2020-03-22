@@ -4,9 +4,9 @@ namespace App\Entity\ServiceRegistry;
 
 interface ServiceRegistryInterface
 {
-    public function getName(): ?string;
+    public function getService(): ?string;
 
-    public function setName($name): void;
+    public function setService($service): void;
 
     public function getHost(): ?string;
 

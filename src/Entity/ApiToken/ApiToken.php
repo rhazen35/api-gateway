@@ -25,7 +25,7 @@ final class ApiToken implements ApiTokenInterface
 
     /**
      * @var null|DateTimeInterface
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $valid;
 

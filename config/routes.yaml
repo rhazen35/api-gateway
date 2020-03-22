@@ -1,7 +1,17 @@
+# -------------
+# Refresh token
+#
+# The refresh token is used to re-authenticate the user, after it's initial JWT authentication token has expired.
+# -------------
 gesdinet_jwt_refresh_token:
     path: /api/token/refresh
     controller: gesdinet.jwtrefreshtoken::refresh
 
+# ----------------------
+# Api JWT authentication
+#
+# Authorization through login_check or authentication_token.
+# ----------------------
 api_login_check:
     path: /api/login_check
 

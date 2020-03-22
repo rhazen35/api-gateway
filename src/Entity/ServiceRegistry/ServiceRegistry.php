@@ -6,7 +6,7 @@ namespace App\Entity\ServiceRegistry;
 
 use App\Entity\ApiToken\ApiTokenHolderInterface;
 use App\Entity\ApiToken\ApiTokenInterface;
-use App\Entity\Traits\IdentifiableTrait;
+use App\Entity\BaseEntity\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,15 +16,13 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Table(name="service_registry")
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRegistry\ServiceRegistryRepository")
  */
-final class ServiceRegistry implements ServiceRegistryInterface, ApiTokenHolderInterface
+final class ServiceRegistry extends BaseEntity implements ServiceRegistryInterface, ApiTokenHolderInterface
 {
-    use IdentifiableTrait;
-
     /**
      * @var null|string
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected $service;
 
     /**
      * @var null|string
@@ -45,7 +43,7 @@ final class ServiceRegistry implements ServiceRegistryInterface, ApiTokenHolderI
 
     /**
      * @var Collection|ApiTokenInterface[]
-     * @ORM\ManyToMany(targetEntity="App\Entity\ApiToken\ApiToken")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ApiToken\ApiToken", cascade={"all"})
      * @ORM\JoinTable(name="service_registry_tokens",
      *     joinColumns={@JoinColumn(name="service_registry_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="api_token_id", referencedColumnName="id", unique=true)}
@@ -58,14 +56,14 @@ final class ServiceRegistry implements ServiceRegistryInterface, ApiTokenHolderI
         $this->apiTokens = new ArrayCollection();
     }
 
-    public function getName(): ?string
+    public function getService(): ?string
     {
-        return $this->name;
+        return $this->service;
     }
 
-    public function setName($name): void
+    public function setService($service): void
     {
-        $this->name = $name;
+        $this->service = $service;
     }
 
     public function getHost(): ?string
@@ -98,19 +96,19 @@ final class ServiceRegistry implements ServiceRegistryInterface, ApiTokenHolderI
         $this->active = $active;
     }
 
-    public function getTokens(): Collection
+    public function getApiTokens(): Collection
     {
         return $this->apiTokens;
     }
 
-    public function addToken(ApiTokenInterface $token): void
+    public function addApiToken(ApiTokenInterface $token): void
     {
         if (!$this->apiTokens->contains($token)) {
             $this->apiTokens->add($token);
         }
     }
 
-    public function removeToken(ApiTokenInterface $token): void
+    public function removeApiToken(ApiTokenInterface $token): void
     {
         if ($this->apiTokens->contains($token)) {
             $this->apiTokens->removeElement($token);

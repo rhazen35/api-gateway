@@ -9,9 +9,9 @@ interface ApiTokenHolderInterface
     /**
      * @return Collection|ApiTokenInterface[]
      */
-    public function getTokens(): Collection;
+    public function getApiTokens(): Collection;
 
-    public function addToken(ApiTokenInterface $token): void;
+    public function addApiToken(ApiTokenInterface $token): void;
 
-    public function removeToken(ApiTokenInterface $token): void;
+    public function removeApiToken(ApiTokenInterface $token): void;
 }

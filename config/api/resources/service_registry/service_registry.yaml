@@ -1,0 +1,30 @@
+App\Entity\ServiceRegistry\ServiceRegistry:
+    attributes:
+        normalization_context:
+            groups: ['serviceRegistry:read']
+        denormalization_context:
+            groups: ['serviceRegistry:write']
+        validation_groups: ['service_registry']
+
+    collectionOperations:
+        get:
+            method: 'GET'
+            groups: ['serviceRegistry:read']
+        post:
+            method: 'POST'
+            groups: ['serviceRegistry:write']
+            validation_groups: ['service_registry']
+
+    itemOperations:
+        get:
+            method: 'GET'
+            groups: ['serviceRegistry:read']
+        put:
+            method: 'PUT'
+            groups: ['serviceRegistry:write']
+        patch:
+            method: 'PATCH'
+            groups: ['serviceRegistry:write']
+        delete:
+            method: 'DELETE'
+            groups: ['serviceRegistry:write']

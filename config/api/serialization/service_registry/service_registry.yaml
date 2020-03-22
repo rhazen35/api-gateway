@@ -1,0 +1,34 @@
+App\Entity\ServiceRegistry\ServiceRegistry:
+    attributes:
+        id:
+            groups: ['serviceRegistry:read']
+        service:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        host:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        port:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        enabled:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        createdAt:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        createdBy:
+            groups:
+                - 'serviceRegistry:read'
+                - 'serviceRegistry:write'
+        updatedAt:
+            groups: ['serviceRegistry:read']
+        updatedBy:
+            groups: ['serviceRegistry:read']
+        deletedAt:
+            groups: ['serviceRegistry:read']
