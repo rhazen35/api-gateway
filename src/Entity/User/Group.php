@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="user_group")
+ * @ORM\Table(name="user_security_group")
  * @ORM\Entity(repositoryClass="App\Repository\User\GroupRepository")
  */
 class Group extends RoleHierarchy implements GroupInterface
@@ -48,14 +48,14 @@ class Group extends RoleHierarchy implements GroupInterface
     /**
      * @var Collection|RoleInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Role", inversedBy="groups")
-     * @ORM\JoinTable(name="groups_roles")
+     * @ORM\JoinTable(name="security_groups_security_roles")
      */
     protected $securityRoles;
 
     /**
      * @var Collection|GroupInterface[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Group")
-     * @ORM\JoinTable(name="user_groups_groups",
+     * @ORM\JoinTable(name="user_security_groups_security_groups",
      *     joinColumns={@ORM\JoinColumn(name="user_group_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="child_group_id", referencedColumnName="id")}
      * )

@@ -72,14 +72,14 @@ class User extends BaseEntity implements UserInterface, \Serializable
     /**
      * @var Collection|GroupInterface[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Group", inversedBy="users", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\JoinTable(name="users_groups")
+     * @ORM\JoinTable(name="users_security_groups")
      */
     protected $groups;
 
     /**
      * @var Collection|RoleInterface[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Role", inversedBy="users", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\JoinTable(name="users_roles")
+     * @ORM\JoinTable(name="users_security_roles")
      */
     protected $securityRoles;
 

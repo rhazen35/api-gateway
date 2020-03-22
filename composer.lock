@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3ee34d738593468875d8a6720ed6b9f",
+    "content-hash": "738746a54c9640b90bd85ff970c56b4f",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -1761,6 +1761,61 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "indragunawan/api-rate-limit-bundle",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IndraGunawan/api-rate-limit-bundle.git",
+                "reference": "9fd1f2883dbef94200bce6f37c590fa156599609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IndraGunawan/api-rate-limit-bundle/zipball/9fd1f2883dbef94200bce6f37c590fa156599609",
+                "reference": "9fd1f2883dbef94200bce6f37c590fa156599609",
+                "shasum": ""
+            },
+            "require": {
+                "api-platform/core": "^2.4",
+                "doctrine/annotations": "^1.4",
+                "php": "^7.1.3",
+                "symfony/cache": "^3.4 || ^4.0 || ^5.0",
+                "symfony/config": "^3.4 || ^4.0 || ^5.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
+                "symfony/http-foundation": "^3.4 || ^4.0 || ^5.0",
+                "symfony/http-kernel": "^4.3 || ^5.0",
+                "symfony/security-bundle": "^3.4 || ^4.0 || ^5.0",
+                "symfony/twig-bundle": "^3.0 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5.2 || ^8.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Indragunawan\\ApiRateLimitBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Indra Gunawan",
+                    "email": "hello@indra.my.id"
+                }
+            ],
+            "description": "Rate limits protection for api-platform resources.",
+            "keywords": [
+                "api-platform",
+                "rate-limit"
+            ],
+            "time": "2020-03-07T19:03:40+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
