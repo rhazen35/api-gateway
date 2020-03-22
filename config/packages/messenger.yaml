@@ -1,0 +1,53 @@
+framework:
+    messenger:
+        failure_transport: failed
+
+        transports:
+            doctrine:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    queue_name: high
+            messages_high_priority:
+                dsn: "%env(MESSENGER_TRANSPORT_RABBITMQ)%"
+                options:
+                    exchange:
+                        name: messages_high_priority
+                        type: direct
+                        default_publish_routing_key: high
+                    queues:
+                        messages_high:
+                            binding_keys: [high]
+            messages_normal_priority:
+                dsn: "%env(MESSENGER_TRANSPORT_RABBITMQ)%"
+                options:
+                    exchange:
+                        name: messages_normal_priority
+                        type: direct
+                        default_publish_routing_key: normal
+                    queues:
+                        messages_normal:
+                            binding_keys: [normal]
+            messages_low_priority:
+                dsn: "%env(MESSENGER_TRANSPORT_RABBITMQ)%"
+                options:
+                    exchange:
+                        name: messages_low_priority
+                        type: direct
+                        default_publish_routing_key: low
+                    queues:
+                        messages_low:
+                            binding_keys: [low]
+            failed:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN_FAILED)%"
+
+        buses:
+            app.command_bus: ~
+            app.event_bus:
+                default_middleware: allow_no_handlers
+
+        default_bus: app.command_bus
+
+        routing:
+            'App\Messenger\AMQP\HighPriorityMessageInterface': messages_high_priority
+            'App\Messenger\AMQP\NormalPriorityMessageInterface': messages_normal_priority
+            'App\Messenger\AMQP\LowPriorityMessageInterface': messages_low_priority

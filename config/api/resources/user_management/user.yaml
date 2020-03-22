@@ -6,11 +6,14 @@ App\Entity\User\User:
             groups: ['userManagement:user:write']
         route_prefix: user_management
         validation_groups: ['user']
+        messenger: true
+        ouput: false
 
     collectionOperations:
         get:
             method: 'GET'
             groups: ['userManagement:user:read']
+            status: 202
         post:
             method: 'POST'
             groups: ['userManagement:user:write']

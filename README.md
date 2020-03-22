@@ -12,6 +12,8 @@ This API uses Symfony 5 with the following bundles:
 - lexik/jwt-authentication-bundle
 - symfony/framework-bundle
 - symfony/validator
+- symfony/messenger
+- gesdinet/jwt-refresh-token-bundle
 
 Installation
 ------------

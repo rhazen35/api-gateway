@@ -20,3 +20,8 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Swagger\SwaggerDecorator:
+        decorates: 'api_platform.swagger.normalizer.documentation'
+        arguments: ['@App\Swagger\SwaggerDecorator.inner']
+        autoconfigure: false
