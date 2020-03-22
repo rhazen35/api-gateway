@@ -2,8 +2,7 @@
 
 This API is the gateway to the Skeme Planning Software
 
-Prerequisites
--------------
+## Prerequisites
 This API uses Symfony 5 with the following bundles:
 
 - api-platform/api-pack
@@ -15,15 +14,13 @@ This API uses Symfony 5 with the following bundles:
 - symfony/messenger
 - gesdinet/jwt-refresh-token-bundle
 
-Installation
-------------
+## Installation
 
 ```bash
 $ composer install
 ```
 
-Database Setup
---------------
+## Database Setup
 
 #### Add the current to you .env (.env.local) file 
 ```bash
@@ -34,8 +31,7 @@ $ bin/console doctrine:migrations:migrate (do:mi:mi) # Migrations
 $ bin/console doctrine:fixtures:load (do:fi:lo) # Data fixtures
 ```
 
-Lexik JWT Bundle Setup
-----------------------
+## Lexik JWT Bundle Setup
 
 #### Generate the SSH keys:
 
@@ -45,8 +41,7 @@ $ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rs
 $ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 ```
 
-Configuration
--------------
+## Configuration
 
 Configure the SSH keys path in your `config/packages/lexik_jwt_authentication.yaml` :
 
@@ -58,8 +53,7 @@ lexik_jwt_authentication:
     token_ttl:        3600
 ```
 
-Making a Request
-----------------
+## Making a Request
 
 In order to make a request you will have to get a JWT Token.
 
@@ -73,8 +67,7 @@ After you get the JWT token you can make requests with the token:
 
 Authorization: Bearer {YOUR_TOKEN}
 
-The Role System Explained
--------------------------
+## The Role System Explained
 
 - Each user has at least one Role or Group
 - A Group is a Role that can have many Roles
@@ -84,7 +77,22 @@ This allows for the following Use Case:
 
 An Admin can create/read/update/delete Users.
 
-[ROLE_ADMIN] has [ROLE_USER_CREATE, ROLE_USER_READ, ROLE_USER_UPDATE, ROLE_USER_DELETE]
+ROLE_ADMIN has the following roles:
 
-You only have to give a user the role ROLE_ADMIN in order to CRUD Users.
+- ROLE_USER_CREATE
+- ROLE_USER_READ
+- ROLE_USER_UPDATE
+- ROLE_USER_DELETE
+
+You only have to give a user the group ROLE_ADMIN in order to CRUD Users.
+
 Or give him/her only a specific role, like ROLE_USER_READ, to only allow for reading users.
+
+## Service Registry
+
+The Service Registry allows for the registration of microservices.
+
+The registered microservice will be assigned an API Token, 
+
+which is needed to authenticate between the different services.
+
