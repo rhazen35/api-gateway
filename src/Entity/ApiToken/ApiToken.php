@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="api_token")
+ * @ORM\Entity(repositoryClass="App\Repository\ApiToken\ApiTokenRepository")
  */
 final class ApiToken implements ApiTokenInterface
 {
@@ -26,13 +27,7 @@ final class ApiToken implements ApiTokenInterface
      * @var null|DateTimeInterface
      * @ORM\Column(type="datetime")
      */
-    protected $expiresAt;
-
-    /**
-     * @var null|ServiceRegistryInterface
-     *
-     */
-    protected $serviceRegistry;
+    protected $valid;
 
     public function getToken(): ?string
     {
@@ -44,23 +39,13 @@ final class ApiToken implements ApiTokenInterface
         $this->token = $token;
     }
 
-    public function getExpiresAt(): ?DateTimeInterface
+    public function getValid(): ?DateTimeInterface
     {
-        return $this->expiresAt;
+        return $this->valid;
     }
 
-    public function setExpiresAt(?DateTimeInterface $expiresAt): void
+    public function setValid(?DateTimeInterface $valid): void
     {
-        $this->expiresAt = $expiresAt;
-    }
-
-    public function getServiceRegistry()
-    {
-        return $this->serviceRegistry;
-    }
-
-    public function setServiceRegistry(ServiceRegistryInterface $serviceRegistry): void
-    {
-        $this->serviceRegistry = $serviceRegistry;
+        $this->valid = $valid;
     }
 }
