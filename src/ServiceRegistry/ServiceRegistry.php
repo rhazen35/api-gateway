@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\ServiceRegistry;
 
+use App\Command\ServiceRegistry\ServiceRegistryCommand;
 use App\ServiceRegistry\Contracts\ServiceRegistryInterface;
+use App\Entity\ServiceRegistry\ServiceRegistryInterface as RegistryInterface;
 
 final class ServiceRegistry implements ServiceRegistryInterface
 {
-    public function register()
+    public function register(ServiceRegistryCommand $command): RegistryInterface
     {
-        // TODO: Implement the register function
+
     }
 
-    public function destroy()
+    public function destroy(): void
     {
         // TODO: Implement the destroy function
     }
