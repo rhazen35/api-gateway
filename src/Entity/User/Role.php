@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
+use App\Entity\Traits\IdentifiableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,16 +15,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="user_security_role")
  * @ORM\Entity(repositoryClass="App\Repository\User\RoleRepository")
  */
-class Role extends RoleHierarchy implements RoleInterface
+class Role extends RoleHierarchy
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use IdentifiableTrait;
 
     /**
      * @var null|string
@@ -32,7 +26,7 @@ class Role extends RoleHierarchy implements RoleInterface
     protected $role;
 
     /**
-     * @var Collection|GroupInterface[]
+     * @var Collection|Group[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Group", mappedBy="securityRoles")
      */
     protected $groups;
@@ -50,11 +44,6 @@ class Role extends RoleHierarchy implements RoleInterface
         $this->users = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getRole(): ?string
     {
         return $this->role;
@@ -70,7 +59,7 @@ class Role extends RoleHierarchy implements RoleInterface
         return $this->groups;
     }
 
-    public function addGroup(GroupInterface $group): void
+    public function addGroup(Group $group): void
     {
         if (!$this->groups->contains($group)) {
             $this->groups->add($group);
@@ -78,7 +67,7 @@ class Role extends RoleHierarchy implements RoleInterface
         }
     }
 
-    public function removeGroup(GroupInterface $group): void
+    public function removeGroup(Group $group): void
     {
         if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
@@ -88,7 +77,7 @@ class Role extends RoleHierarchy implements RoleInterface
 
     public function getUsers(): Collection
     {
-        return $this->groups;
+        return $this->users;
     }
 
     public function addUser(UserInterface $user): void

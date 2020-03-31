@@ -4,7 +4,7 @@ App\Entity\User\User:
             groups: ['userManagement:user:read']
         denormalization_context:
             groups: ['userManagement:user:write']
-        route_prefix: user_management
+        route_prefix: v1/user_management
         validation_groups: ['user']
         messenger: true
         ouput: false

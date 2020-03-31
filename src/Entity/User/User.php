@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
-use App\Entity\BaseEntity\BaseEntity;
+use App\Entity\BaseEntity\AbstractBaseEntity;
 use App\Utility\Security\CombinedGroupsUtility;
 use App\Utility\Security\CombinedRolesUtility;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="App\Repository\User\UserRepository")
  */
-class User extends BaseEntity implements UserInterface, \Serializable
+class User extends AbstractBaseEntity implements UserInterface, Serializable
 {
     use CombinedRolesUtility,
     CombinedGroupsUtility;
@@ -70,14 +71,14 @@ class User extends BaseEntity implements UserInterface, \Serializable
     protected $currentLogin;
 
     /**
-     * @var Collection|GroupInterface[]
+     * @var Collection|Group[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Group", inversedBy="users", cascade={"persist"}, orphanRemoval=true)
      * @ORM\JoinTable(name="users_security_groups")
      */
     protected $groups;
 
     /**
-     * @var Collection|RoleInterface[]
+     * @var Collection|Role[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Role", inversedBy="users", cascade={"persist"}, orphanRemoval=true)
      * @ORM\JoinTable(name="users_security_roles")
      */
@@ -175,7 +176,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
         return self::getCombinedGroups($this->groups);
     }
 
-    public function addGroup(GroupInterface $group): void
+    public function addGroup(Group $group): void
     {
         if (!$this->groups->contains($group)) {
             $this->groups->add($group);
@@ -183,7 +184,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
         }
     }
 
-    public function removeGroup(GroupInterface $group): void
+    public function removeGroup(Group $group): void
     {
         if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
@@ -204,7 +205,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
         return $this->securityRoles;
     }
 
-    public function addSecurityRole(RoleInterface $role): void
+    public function addSecurityRole(Role $role): void
     {
         if (!$this->securityRoles->contains($role)) {
             $this->securityRoles->add($role);
@@ -212,7 +213,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
         }
     }
 
-    public function removeSecurityRole(RoleInterface $role): void
+    public function removeSecurityRole(Role $role): void
     {
         if ($this->securityRoles->contains($role)) {
             $this->securityRoles->removeElement($role);

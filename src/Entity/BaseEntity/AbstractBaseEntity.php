@@ -13,7 +13,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @ORM\MappedSuperclass()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=true)
  */
-abstract class BaseEntity
+abstract class AbstractBaseEntity
 {
     use IdentifiableTrait,
     TimestampableEntity,

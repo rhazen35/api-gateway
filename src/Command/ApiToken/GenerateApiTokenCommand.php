@@ -6,7 +6,7 @@ namespace App\Command\ApiToken;
 
 use DateTimeInterface;
 
-final class GenerateApiTokenCommand implements GenerateApiTokenCommandInterface
+final class GenerateApiTokenCommand
 {
     /**
      * @var DateTimeInterface

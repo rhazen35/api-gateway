@@ -6,7 +6,7 @@ namespace App\Entity\ServiceRegistry;
 
 use App\Entity\ApiToken\ApiTokenHolderInterface;
 use App\Entity\ApiToken\ApiTokenInterface;
-use App\Entity\BaseEntity\BaseEntity;
+use App\Entity\BaseEntity\AbstractBaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Table(name="service_registry")
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRegistry\ServiceRegistryRepository")
  */
-final class ServiceRegistry extends BaseEntity implements ServiceRegistryInterface, ApiTokenHolderInterface
+final class ServiceRegistry extends AbstractBaseEntity implements ServiceRegistryInterface, ApiTokenHolderInterface
 {
     /**
      * @var null|string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
+use App\Entity\Traits\IdentifiableTrait;
 use App\Utility\Security\CombinedRolesUtility;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,23 +16,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="user_security_group")
  * @ORM\Entity(repositoryClass="App\Repository\User\GroupRepository")
  */
-class Group extends RoleHierarchy implements GroupInterface
+class Group extends RoleHierarchy
 {
-    use CombinedRolesUtility;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    use CombinedRolesUtility,
+        IdentifiableTrait;
 
     /**
      * @var null|string
@@ -46,14 +34,14 @@ class Group extends RoleHierarchy implements GroupInterface
     protected $users;
 
     /**
-     * @var Collection|RoleInterface
+     * @var Collection|Role
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Role", inversedBy="groups")
      * @ORM\JoinTable(name="security_groups_security_roles")
      */
     protected $securityRoles;
 
     /**
-     * @var Collection|GroupInterface[]
+     * @var Collection|Group[]
      * @ORM\ManyToMany(targetEntity="App\Entity\User\Group")
      * @ORM\JoinTable(name="user_security_groups_security_groups",
      *     joinColumns={@ORM\JoinColumn(name="user_group_id", referencedColumnName="id")},
@@ -114,7 +102,7 @@ class Group extends RoleHierarchy implements GroupInterface
         return self::getCombinedRoles($groups, $roles);
     }
 
-    public function addSecurityRole(RoleInterface $role): void
+    public function addSecurityRole(Role $role): void
     {
         if (!$this->securityRoles->contains($role)) {
             $this->securityRoles->add($role);
@@ -122,7 +110,7 @@ class Group extends RoleHierarchy implements GroupInterface
         }
     }
 
-    public function removeSecurityRole(RoleInterface $role): void
+    public function removeSecurityRole(Role $role): void
     {
         if ($this->securityRoles->contains($role)) {
             $this->securityRoles->removeElement($role);
@@ -135,14 +123,14 @@ class Group extends RoleHierarchy implements GroupInterface
         return $this->childGroups;
     }
 
-    public function addChildGroup(GroupInterface $group): void
+    public function addChildGroup(Group $group): void
     {
         if (!$this->childGroups->contains($group)) {
             $this->childGroups->add($group);
         }
     }
 
-    public function removeChildGroup(GroupInterface $group): void
+    public function removeChildGroup(Group$group): void
     {
         if ($this->childGroups->contains($group)) {
             $this->childGroups->removeElement($group);

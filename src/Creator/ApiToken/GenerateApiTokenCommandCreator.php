@@ -7,7 +7,7 @@ namespace App\Creator\ApiToken;
 use App\Command\ApiToken\GenerateApiTokenCommand;
 use DateTimeInterface;
 
-final class GenerateApiTokenCommandCreator implements GenerateApiTokenCommandCreatorInterface
+final class GenerateApiTokenCommandCreator
 {
     public function createFromValid(?DateTimeInterface $valid): GenerateApiTokenCommand
     {

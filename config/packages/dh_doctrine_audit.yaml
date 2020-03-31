@@ -1,0 +1,13 @@
+dh_doctrine_audit:
+
+    entities:
+        # User
+        App\Entity\User\User: ~
+        App\Entity\User\Group: ~
+        App\Entity\User\Role: ~
+
+        # Service Registry
+        App\Entity\ServiceRegistry\ServiceRegistry: ~
+
+        # Api Token
+        App\Entity\ApiToken: ~

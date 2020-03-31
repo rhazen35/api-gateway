@@ -9,7 +9,7 @@ use App\Factory\ApiToken\ApiTokenFactoryInterface;
 use App\Utility\API\ApiTokenCreatorUtility;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class GenerateApiTokenCommandHandler implements GenerateApiTokenCommandHandlerInterface, MessageHandlerInterface
+final class GenerateApiTokenCommandHandler implements MessageHandlerInterface
 {
     /** @var ApiTokenFactoryInterface */
     private $apiTokenFactory;

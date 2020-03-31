@@ -5,6 +5,7 @@ App\Entity\ServiceRegistry\ServiceRegistry:
         denormalization_context:
             groups: ['serviceRegistry:write']
         validation_groups: ['service_registry']
+        route_prefix: v1/
 
     collectionOperations:
         get:

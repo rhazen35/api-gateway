@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DataPersister\ServiceRegistry;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
-use App\Creator\ApiToken\GenerateApiTokenCommandCreatorInterface;
+use App\Creator\ApiToken\GenerateApiTokenCommandCreator;
 use App\Entity\ApiToken\ApiTokenInterface;
 use App\Entity\ServiceRegistry\ServiceRegistry;
 use DateTime;
@@ -22,13 +22,13 @@ final class ServiceRegistryDataPersister implements DataPersisterInterface
     /** @var MessageBusInterface */
     private $messageBus;
 
-    /** @var GenerateApiTokenCommandCreatorInterface */
+    /** @var GenerateApiTokenCommandCreator */
     private $apiTokenCommandCreator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         MessageBusInterface $messageBus,
-        GenerateApiTokenCommandCreatorInterface $apiTokenCommandCreator
+        GenerateApiTokenCommandCreator $apiTokenCommandCreator
     )
     {
         $this->entityManager = $entityManager;

@@ -4,7 +4,7 @@ App\Entity\User\Role:
             groups: ['userManagement:role:read']
         denormalization_context:
             groups: ['userManagement:role:write']
-        route_prefix: user_management
+        route_prefix: v1/user_management
         validation_groups: ['role']
 
     collectionOperations:
