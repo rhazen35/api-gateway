@@ -14,5 +14,19 @@ namespace App\Messenger\Publish;
 
 class PublishMessageFactory
 {
+    public function create(): PublishMessage
+    {
+        return new PublishMessage();
+    }
 
+    public function createFromArray(array $data): PublishMessage
+    {
+        $message = $this->create();
+
+        $message
+            ->setChannel($data['channel'])
+            ->setPayload($data['payload']);
+
+        return $message;
+    }
 }

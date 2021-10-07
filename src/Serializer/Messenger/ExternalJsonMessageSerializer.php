@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Serialization\Messenger;
+namespace App\Serializer\Messenger;
 
-use App\Messenger\External\ExternalMessageFactory;
+use App\Messenger\Publish\PublishMessageFactory;
 use Exception;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 class ExternalJsonMessageSerializer implements SerializerInterface
 {
-    private ExternalMessageFactory $externalMessageFactory;
+    private PublishMessageFactory $publishMessageFactory;
 
-    public function __construct(ExternalMessageFactory $externalMessageFactory)
+    public function __construct(PublishMessageFactory $publishMessageFactory)
     {
-        $this->externalMessageFactory = $externalMessageFactory;
+        $this->publishMessageFactory = $publishMessageFactory;
     }
 
     /**
@@ -42,7 +42,7 @@ class ExternalJsonMessageSerializer implements SerializerInterface
         }
 
         $message = $this
-            ->externalMessageFactory
+            ->publishMessageFactory
             ->createFromArray($data);
 
         return new Envelope($message, $stamps);
