@@ -1,0 +1,25 @@
+framework:
+    messenger:
+        failure_transport: failed
+
+        transports:
+            publish:
+                serializer: app.serializer.messenger.external_json_serializer
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: amq.direct
+                        type: direct
+
+            failed:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN_FAILED)%"
+
+        buses:
+            app.command_bus: ~
+            app.event_bus:
+                default_middleware: allow_no_handlers
+
+        default_bus: app.command_bus
+
+        routing:
+            'App\Messenger\Contract\PublishMessageInterface': publish
