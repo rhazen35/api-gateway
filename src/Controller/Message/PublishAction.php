@@ -29,8 +29,6 @@ class PublishAction
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws EmptyJsonBodyException
      */
     public function __invoke(Request $request): JsonResponse
