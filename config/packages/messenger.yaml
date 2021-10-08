@@ -21,7 +21,7 @@ framework:
                         type: direct
                         default_publish_routing_key: direct
                     queues:
-                        api_gateway_user_management:
+                        api_gateway:
                             binding_keys:
                                 - invalid_create_user
                                 - user_created
