@@ -10,8 +10,3 @@
 /vendor/
 ###< symfony/framework-bundle ###
 .idea
-
-###> docker ###
-/api-gateway-docker/database/data/*
-/api-gateway-docker/.env
-###< docker ###
