@@ -10,8 +10,21 @@
 
 declare(strict_types=1);
 
-namespace App\Messenger\Contract;
+namespace App\Messenger\Stamp\Id;
 
-interface PublishMessageInterface
+use Symfony\Component\Messenger\Stamp\StampInterface;
+
+class IdStamp implements StampInterface
 {
+    private string $id;
+
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
 }

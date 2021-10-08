@@ -3,23 +3,35 @@ framework:
         failure_transport: failed
 
         transports:
+            failed:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN_FAILED)%"
+
             publish:
-                serializer: app.serializer.messenger.external_json_serializer
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
                 options:
                     exchange:
                         name: amq.direct
                         type: direct
 
-            failed:
-                dsn: "%env(MESSENGER_TRANSPORT_DSN_FAILED)%"
+            subscribe:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: amq.direct
+                        type: direct
+                        default_publish_routing_key: direct
+                    queues:
+                        api_gateway_user_management:
+                            binding_keys:
+                                - invalid_create_user
+                                - user_created
 
+        default_bus: command_bus
         buses:
-            app.command_bus: ~
-            app.event_bus:
+            command_bus:
                 default_middleware: allow_no_handlers
-
-        default_bus: app.command_bus
+                middleware:
+                    - App\Messenger\Middleware\AuditMiddleware
 
         routing:
-            'App\Messenger\Contract\PublishMessageInterface': publish
+            'App\Messenger\Contract\MessageInterface': publish
