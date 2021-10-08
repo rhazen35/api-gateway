@@ -23,7 +23,6 @@ framework:
                     queues:
                         api_gateway:
                             binding_keys:
-                                - invalid_create_user
                                 - user_created
 
         default_bus: command_bus
@@ -32,6 +31,11 @@ framework:
                 default_middleware: allow_no_handlers
                 middleware:
                     - App\Messenger\Middleware\AuditMiddleware
+            event_bus:
+                default_middleware: allow_no_handlers
+                middleware:
+                    - App\Messenger\Middleware\AuditMiddleware
 
         routing:
-            'App\Messenger\Contract\MessageInterface': publish
+            'App\Messenger\Contract\PublishMessageInterface': publish
+            'App\Messenger\Contract\SubscribeMessageInterface': subscribe

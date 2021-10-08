@@ -12,6 +12,6 @@
 .idea
 
 ###> docker ###
-/docker/database/data/*
-/docker/.env
+/api-gateway-docker/database/data/*
+/api-gateway-docker/.env
 ###< docker ###
