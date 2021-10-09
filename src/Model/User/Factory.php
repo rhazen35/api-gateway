@@ -9,16 +9,12 @@ use Symfony\Component\Uid\Uuid;
 
 class Factory
 {
-    public function createFromExternalIdAndEmail(
-        string $externalId,
-        string $email
-    ): User {
+    public function createFromExternalId(string $externalId): User
+    {
         $user = new User();
         $externalUuid = Uuid::v4()::fromRfc4122($externalId);
 
-        $user
-            ->setExternalId($externalUuid)
-            ->setEmail($email);
+        $user->setExternalId($externalUuid);
 
         return $user;
     }

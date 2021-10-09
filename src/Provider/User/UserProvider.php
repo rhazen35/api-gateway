@@ -6,8 +6,8 @@ namespace App\Provider\User;
 
 use App\Entity\User\User;
 use App\Repository\User\UserRepository;
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Component\Uid\UuidV4;
 
 class UserProvider
 {
@@ -26,5 +26,15 @@ class UserProvider
         return $this
             ->userRepository
             ->findOneOrNullByEmail($email);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function getByDataRequestId(UuidV4 $dataRequestId): ?User
+    {
+        return $this
+            ->userRepository
+            ->findOneOrNullByDataRequestId($dataRequestId);
     }
 }

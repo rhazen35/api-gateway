@@ -7,15 +7,25 @@ namespace App\Handler\User;
 use App\Enum\User\Channel;
 use App\Handler\Contract\HandlerInterface;
 use App\Messenger\Message;
+use App\Messenger\Query\User\GetUserQueryFactory;
+use App\Messenger\Stamp\Id\IdStamp;
 use App\Model\User\Manager;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class UserCreatedHandler implements HandlerInterface
 {
     private Manager $manager;
+    private GetUserQueryFactory $getUserQueryFactory;
+    private MessageBusInterface $queryBus;
 
-    public function __construct(Manager $manager)
-    {
+    public function __construct(
+        Manager $manager,
+        GetUserQueryFactory $getUserQueryFactory,
+        MessageBusInterface $queryBus
+    ) {
         $this->manager = $manager;
+        $this->getUserQueryFactory = $getUserQueryFactory;
+        $this->queryBus = $queryBus;
     }
 
     public function supports(Message $message): bool
@@ -27,17 +37,31 @@ class UserCreatedHandler implements HandlerInterface
     {
         $payload = $message->getPayload();
         $id = $payload['id'] ?? null;
-        $email = $payload['email'] ?? null;
 
-        if (null === $id ||null === $email) {
+        if (null === $id) {
             return;
         }
 
+        $user = $this
+            ->manager
+            ->createFromExternalIdAndFlush($id);
+
+        $envelope = $this
+            ->getUserQueryFactory
+            ->create($user);
+
+        /** @var IdStamp $idStamp */
+        $idStamp = $envelope->last(IdStamp::class);
+
         $this
             ->manager
-            ->createFromExternalIdAndEmailAndFlush(
-                $id,
-                $email
+            ->updateDataRequestedAndFlush(
+                $user,
+                $idStamp->getId()
             );
+
+        $this
+            ->queryBus
+            ->dispatch($envelope);
     }
 }

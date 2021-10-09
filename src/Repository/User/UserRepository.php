@@ -6,8 +6,10 @@ namespace App\Repository\User;
 
 use App\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Uid\UuidV4;
 
 class UserRepository extends ServiceEntityRepository
 {
@@ -25,6 +27,19 @@ class UserRepository extends ServiceEntityRepository
             ->createQueryBuilder('user')
             ->where('user.email = :email')
             ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findOneOrNullByDataRequestId(UuidV4 $dataRequestId): ?User
+    {
+        return $this
+            ->createQueryBuilder('user')
+            ->where('user.dataRequestId = :dataRequestId')
+            ->setParameter('dataRequestId', $dataRequestId->toBinary())
             ->getQuery()
             ->getOneOrNullResult();
     }

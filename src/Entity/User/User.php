@@ -27,9 +27,27 @@ class User
     protected UuidV4 $externalId;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(
+     *     type="uuid",
+     *     unique=true,
+     *     nullable=true
+     * )
      */
-    protected string $email;
+    protected ?UuidV4 $dataRequestId;
+
+    /**
+     * @ORM\Column(
+     *     type="string",
+     *     length=255,
+     *     nullable=true
+     *     )
+     */
+    protected ?string $email;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    protected ?DateTimeImmutable $dataRequestedAt = null;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=false)
@@ -64,7 +82,19 @@ class User
         return $this;
     }
 
-    public function getEmail(): string
+    public function getDataRequestId(): ?UuidV4
+    {
+        return $this->dataRequestId;
+    }
+
+    public function setDataRequestId(?UuidV4 $dataRequestId): self
+    {
+        $this->dataRequestId = $dataRequestId;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -72,6 +102,18 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getDataRequestedAt(): ?DateTimeImmutable
+    {
+        return $this->dataRequestedAt;
+    }
+
+    public function setDataRequestedAt(?DateTimeImmutable $dataRequestedAt): self
+    {
+        $this->dataRequestedAt = $dataRequestedAt;
 
         return $this;
     }
