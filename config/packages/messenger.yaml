@@ -24,6 +24,7 @@ framework:
                         api_gateway:
                             binding_keys:
                                 - user_created
+                                - user_authenticated
 
         default_bus: command_bus
         buses:

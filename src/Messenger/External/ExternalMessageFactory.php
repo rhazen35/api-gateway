@@ -22,8 +22,10 @@ class ExternalMessageFactory
         $this->idStampFactory = $idStampFactory;
     }
 
-    public function create(RequestData $requestData): Envelope
-    {
+    public function create(
+        RequestData $requestData,
+        string $token
+    ): Envelope {
         $idStamp = $this
             ->idStampFactory
             ->create();
@@ -37,6 +39,7 @@ class ExternalMessageFactory
             $requestData->getPayload(),
             $idStamp->getId(),
             null,
+            $token
         );
 
         return new Envelope(
