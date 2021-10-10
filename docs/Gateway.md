@@ -27,4 +27,7 @@ The response consist of two parts.
 * The status code. (202 Accepted)
 * The response body. (messageId)
 
+The messageId can be used to keep track of the message on the client side.
+This is very useful for when an event should be pinpointed to a particular message. 
+
 ![Response Body Example Image](/docs/image/response-body-example.png)
