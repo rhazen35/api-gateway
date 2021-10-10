@@ -24,7 +24,6 @@ framework:
                         api_gateway_subscribe:
                             binding_keys:
                                 - user_created
-                                - user_authenticated
 
             query:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
