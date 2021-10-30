@@ -6,6 +6,7 @@ namespace App\Provider\User;
 
 use App\Entity\User\User;
 use App\Repository\User\UserRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\Uid\UuidV4;
 
@@ -36,5 +37,16 @@ class UserProvider
         return $this
             ->userRepository
             ->findOneOrNullByDataRequestId($dataRequestId);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws EntityNotFoundException
+     */
+    public function getUserByExternalId(UuidV4 $id): User
+    {
+        return $this
+            ->userRepository
+            ->findOneByExternalId($id);
     }
 }

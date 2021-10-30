@@ -3,7 +3,7 @@
 This service functions as a Gateway for all external API requests.
 Only a single route is provided for publishing the requests to the message broker.
 
-#### Route: http://some_host/api/message/publish
+#### Route: http://{HOST}:{PORT}/api/message/publish
 
 ## JSON
 The request body has the following structure:

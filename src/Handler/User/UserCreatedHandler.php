@@ -5,27 +5,22 @@ declare(strict_types=1);
 namespace App\Handler\User;
 
 use App\Enum\User\Channel;
+use App\Enum\User\Properties;
 use App\Handler\Contract\HandlerInterface;
 use App\Messenger\Message;
-use App\Messenger\Query\User\GetUserQueryFactory;
-use App\Messenger\Stamp\Id\IdStamp;
 use App\Model\User\Manager;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 class UserCreatedHandler implements HandlerInterface
 {
     private Manager $manager;
-    private GetUserQueryFactory $getUserQueryFactory;
-    private MessageBusInterface $queryBus;
+    private UpdateUserHandler $updateUserHandler;
 
     public function __construct(
         Manager $manager,
-        GetUserQueryFactory $getUserQueryFactory,
-        MessageBusInterface $queryBus
+        UpdateUserHandler $updateUserHandler
     ) {
         $this->manager = $manager;
-        $this->getUserQueryFactory = $getUserQueryFactory;
-        $this->queryBus = $queryBus;
+        $this->updateUserHandler = $updateUserHandler;
     }
 
     public function supports(Message $message): bool
@@ -36,7 +31,7 @@ class UserCreatedHandler implements HandlerInterface
     public function __invoke(Message $message): void
     {
         $payload = $message->getPayload();
-        $id = $payload['id'] ?? null;
+        $id = $payload[Properties::ID] ?? null;
 
         if (null === $id) {
             return;
@@ -46,22 +41,11 @@ class UserCreatedHandler implements HandlerInterface
             ->manager
             ->createFromExternalIdAndFlush($id);
 
-        $envelope = $this
-            ->getUserQueryFactory
-            ->create($user);
-
-        /** @var IdStamp $idStamp */
-        $idStamp = $envelope->last(IdStamp::class);
-
         $this
-            ->manager
-            ->updateDataRequestedAndFlush(
+            ->updateUserHandler
+            ->__invoke(
                 $user,
-                $idStamp->getId()
+                $message
             );
-
-        $this
-            ->queryBus
-            ->dispatch($envelope);
     }
 }

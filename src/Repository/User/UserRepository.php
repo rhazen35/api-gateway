@@ -43,4 +43,37 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findOneOrNullByExternalId(UuidV4 $externalId): ?User
+    {
+        return $this
+            ->createQueryBuilder('user')
+            ->where('user.externalId = :externalId')
+            ->setParameter('externalId', $externalId->toBinary())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws EntityNotFoundException
+     */
+    public function findOneByExternalId(UuidV4 $externalId): User
+    {
+        $user = $this->findOneOrNullByExternalId($externalId);
+
+        if (null === $user) {
+            throw new EntityNotFoundException(
+                sprintf(
+                    'A user with externalId "%s" could not be found.',
+                    $externalId->toRfc4122()
+                )
+            );
+        }
+
+        return $user;
+    }
 }

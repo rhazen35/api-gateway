@@ -16,3 +16,7 @@ This service adheres to the following principles and patterns:
 ## Development
 The versioning of this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 All notable changes and Versions have to be documented in the [CHANGELOG.md](./CHANGELOG.md).
+
+## Mercure
+For live updates the Mercure protocol is being used. 
+Please visit the [Documentation](http://127.0.0.1:3000/.well-known/mercure/ui/) for more information.

@@ -66,10 +66,15 @@ class Manager
         User $user,
         string $email
     ): User {
+        $updatedAt = $this
+            ->dateTimeProvider
+            ->getCurrentDateTimeImmutable();
+
         $user
             ->setEmail($email)
             ->setDataRequestId(null)
-            ->setDataRequestedAt(null);
+            ->setDataRequestedAt(null)
+            ->setUpdatedAt($updatedAt);
 
         $this
             ->entityManager
