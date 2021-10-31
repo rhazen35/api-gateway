@@ -25,6 +25,7 @@ framework:
                             binding_keys:
                                 - user_created
                                 - user_updated
+                                - user_deleted
 
             query:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"

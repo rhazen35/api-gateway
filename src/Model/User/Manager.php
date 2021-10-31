@@ -82,4 +82,19 @@ class Manager
 
         return $user;
     }
+
+    public function deleteAndFlush(User $user): User
+    {
+        $deletedAt = $this
+            ->dateTimeProvider
+            ->getCurrentDateTimeImmutable();
+
+        $user->setDeletedAt($deletedAt);
+
+        $this
+            ->entityManager
+            ->flush();
+
+        return $user;
+    }
 }
