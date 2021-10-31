@@ -59,6 +59,11 @@ class User
      */
     protected ?DateTimeImmutable $updatedAt = null;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    protected ?DateTimeImmutable $deletedAt = null;
+
     public function __construct()
     {
         $this->id = Uuid::v4();
@@ -138,6 +143,18 @@ class User
     public function setUpdatedAt(?DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?DateTimeImmutable
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?DateTimeImmutable $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
