@@ -7,16 +7,19 @@ namespace App\Validator\Request;
 use App\Exception\Controller\JsonBody\EmptyJsonBodyException;
 use App\Exception\Controller\JsonBody\Property\ChannelPropertyDoesNotExistException;
 use App\Exception\Controller\JsonBody\Property\PayloadPropertyDoesNotExistException;
+use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 
 class RequestValidator
 {
     public function validate(Request $request): void
     {
-        $content = $request->getContent();
-        $data = json_decode($content);
+        $requestParams = $request->request->all();
+        $data = new stdClass();
+        $data->channel = $requestParams['channel'];
+        $data->payload = (object) $requestParams['payload'];
 
-        if (null === $data) {
+        if ([] === $requestParams) {
             throw new EmptyJsonBodyException();
         }
 
