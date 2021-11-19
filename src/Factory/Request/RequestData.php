@@ -7,11 +7,11 @@ namespace App\Factory\Request;
 class RequestData
 {
     private string $channel;
-    private object $payload;
+    private ?object $payload;
 
     public function __construct(
         string $channel,
-        object $payload
+        ?object $payload
     ) {
         $this->channel = $channel;
         $this->payload = $payload;
@@ -22,7 +22,7 @@ class RequestData
         return $this->channel;
     }
 
-    public function getPayload(): object
+    public function getPayload(): ?object
     {
         return $this->payload;
     }

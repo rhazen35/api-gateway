@@ -13,8 +13,11 @@ class RequestDataFactory
     {
         $requestParams = $request->request->all();
         $data = new stdClass();
+        $payload = $requestParams['payload'] ?? null;
         $data->channel = $requestParams['channel'];
-        $data->payload = (object) $requestParams['payload'];
+        $data->payload = null === $payload
+            ? null
+            : (object) $payload;
 
         return new RequestData($data->channel, $data->payload);
     }
