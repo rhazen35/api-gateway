@@ -9,6 +9,7 @@ use App\Handler\Request\RequestHandler;
 use App\Validator\Request\RequestValidator;
 use App\ViewTransformer\Response\ResponseViewTransformer;
 use Doctrine\ORM\NonUniqueResultException;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,7 @@ class PublishAction
     /**
      * @throws EmptyJsonBodyException
      * @throws NonUniqueResultException
+     * @throws JWTDecodeFailureException
      */
     public function __invoke(Request $request): JsonResponse
     {

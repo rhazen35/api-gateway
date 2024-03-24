@@ -12,6 +12,7 @@ use App\Messenger\Stamp\Id\IdStamp;
 use App\Provider\Authentication\Token\TokenProvider;
 use App\Validator\Request\TokenValidator;
 use Doctrine\ORM\NonUniqueResultException;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -39,6 +40,7 @@ class RequestHandler
 
     /**
      * @throws NonUniqueResultException
+     * @throws JWTDecodeFailureException
      */
     public function __invoke(Request $request): string
     {
@@ -67,6 +69,7 @@ class RequestHandler
 
     /**
      * @throws NonUniqueResultException
+     * @throws JWTDecodeFailureException
      */
     private function getToken(
         Request $request,
